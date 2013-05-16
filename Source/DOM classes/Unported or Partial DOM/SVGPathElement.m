@@ -24,7 +24,9 @@
 {
 	[super postProcessAttributesAddingErrorsTo:parseResult];
 	
-	[self parseData:[self getAttribute:@"d"]];
+   @autoreleasepool {
+      [self parseData:[self getAttribute:@"d"]];
+   }
 }
 
 - (void)parseData:(NSString *)data
@@ -39,7 +41,7 @@
     NSString* command;
     
     do {
-        
+       @autoreleasepool {
         command = nil;
         foundCmd = [dataScanner scanCharactersFromSet:knownCommands intoString:&command];
         
@@ -150,7 +152,7 @@
                 }
             }
         }
-        
+       }
     } while (foundCmd);
 	
     
